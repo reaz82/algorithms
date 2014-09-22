@@ -104,7 +104,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     } // return an independent iterator over items in random order
     
     private class RandomIterator implements Iterator<Item> {
-        private int i = N;
+        private int i;
+        private Item[] iterator;
+        
+        public RandomIterator() {
+            iterator = (Item[]) new Object[N];
+            for (i = 0; i < N; i++) {
+                iterator[i] = items[i];
+            }
+        }
         
         public boolean hasNext() {
             return (i > 0); 
@@ -112,10 +120,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         public Item next() {
             if (this.hasNext()) {
                 int iteratorIndex = StdRandom.uniform(0, i);
-                Item iteratedItem = items[iteratorIndex];
-                items[iteratorIndex] = items[i-1];
-                items[i-1] = iteratedItem;
-                return items[--i];
+                Item iteratedItem = iterator[iteratorIndex];
+                iterator[iteratorIndex] = iterator[i-1];
+                iterator[i-1] = iteratedItem;
+                return iterator[--i];
             } else throw new java.util.NoSuchElementException("No elements in queue");
         }
         public void remove() {
