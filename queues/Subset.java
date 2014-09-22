@@ -7,7 +7,7 @@
  */
 public class Subset {
     public static void main (String[] args) {
-        int k = 1;
+        int k = Integer.parseInt(args[0]);
         RandomizedQueue<String> SetOfStrings = new RandomizedQueue<String>();
         while (!StdIn.isEmpty()) {
             SetOfStrings.enqueue(StdIn.readString());
