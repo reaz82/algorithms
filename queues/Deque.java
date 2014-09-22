@@ -31,9 +31,9 @@ public class Deque<Item> implements Iterable<Item> {
      * can traverse forwards and backwards. 
      */
     private class Node<Item> {
-        Item item;
-        Node<Item> next;
-        Node<Item> previous;
+        private Item item;
+        private Node<Item> next;
+        private Node<Item> previous;
     }
     
     /** 
@@ -67,7 +67,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @param reference of type <Item>
      */
     public void addFirst(Item item) {
-        if (item == null) throw new java.util.NoSuchElementException("Unable to add null element"); 
+        if (item == null) throw new NullPointerException("Unable to add null element"); 
         // Copy reference to old front node
         Node<Item> oldFront = this.front;
         // Create new node based on item
@@ -88,7 +88,7 @@ public class Deque<Item> implements Iterable<Item> {
      * @param Object of type <Item>
      */
     public void addLast(Item item) {
-        if (item == null) throw new java.util.NoSuchElementException("Unable to add null element");
+        if (item == null) throw new NullPointerException("Unable to add null element");
         // Copy reference to old back node
         Node<Item> oldBack = this.back;
         // Create new node based on item
@@ -105,7 +105,7 @@ public class Deque<Item> implements Iterable<Item> {
         this.size++;
     }
     public Item removeFirst() {
-        if (this.isEmpty()) throw new UnsupportedOperationException("Can't remove from an empty deque"); 
+        if (this.isEmpty()) throw new java.util.NoSuchElementException("Can't remove from an empty deque"); 
         // Copy a reference to the first node.
         Node<Item> first = this.front;
         // Perform the node removal
@@ -121,7 +121,7 @@ public class Deque<Item> implements Iterable<Item> {
         return first.item;
     }
     public Item removeLast() {
-        if (this.isEmpty()) throw new UnsupportedOperationException("Can't remove from an empty deque");
+        if (this.isEmpty()) throw new java.util.NoSuchElementException("Can't remove from an empty deque");
         // Copy a reference to the last node.
         Node<Item> last = this.back;
         // Perform the node removal
@@ -138,13 +138,13 @@ public class Deque<Item> implements Iterable<Item> {
     }
     public Iterator<Item> iterator() {
         
-        return new itemIterator();
+        return new ItemIterator();
     }
     /** 
      * The Deque implements Iterable class which means it needs to be 
      * able to return an iterator.
      */
-    private class itemIterator implements Iterator<Item> {
+    private class ItemIterator implements Iterator<Item> {
         private Node<Item> iterator = front;
         /**
         * This method is a required method of the Iterator interface. It is 
@@ -164,7 +164,7 @@ public class Deque<Item> implements Iterable<Item> {
             item = iterator.item;
             if (hasNext()) {
                 iterator = iterator.next;
-            } 
+            } else throw new java.util.NoSuchElementException("Element does not exist");
             return item; 
         } 
         public void remove() {
@@ -173,66 +173,66 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-        Deque<String> DequeOfStrings;
-        DequeOfStrings = new Deque<String>();
+        Deque<String> dequeOfStrings;
+        dequeOfStrings = new Deque<String>();
         
         StdOut.println("Testing Stack behavior of the Deque");
         StdOut.println("Pushing Data into the Deque from the front");
-        DequeOfStrings.addFirst("?");
-        DequeOfStrings.addFirst("you ");
-        DequeOfStrings.addFirst("are ");
-        DequeOfStrings.addFirst("How ");
+        dequeOfStrings.addFirst("?");
+        dequeOfStrings.addFirst("you ");
+        dequeOfStrings.addFirst("are ");
+        dequeOfStrings.addFirst("How ");
         StdOut.println("Popping Data out of the Deque from the front");
-        StdOut.print(DequeOfStrings.removeFirst());
-        StdOut.print(DequeOfStrings.removeFirst());
-        StdOut.print(DequeOfStrings.removeFirst());
-        StdOut.println(DequeOfStrings.removeFirst());
+        StdOut.print(dequeOfStrings.removeFirst());
+        StdOut.print(dequeOfStrings.removeFirst());
+        StdOut.print(dequeOfStrings.removeFirst());
+        StdOut.println(dequeOfStrings.removeFirst());
         
         StdOut.println("Pushing Data into the Deque from the back");
-        DequeOfStrings.addLast("?");
-        DequeOfStrings.addLast("you ");
-        DequeOfStrings.addLast("are ");
-        DequeOfStrings.addLast("How ");
+        dequeOfStrings.addLast("?");
+        dequeOfStrings.addLast("you ");
+        dequeOfStrings.addLast("are ");
+        dequeOfStrings.addLast("How ");
         StdOut.println("Popping Data out of the Deque from the back");
-        StdOut.print(DequeOfStrings.removeLast());
-        StdOut.print(DequeOfStrings.removeLast());
-        StdOut.print(DequeOfStrings.removeLast());
-        StdOut.println(DequeOfStrings.removeLast());
+        StdOut.print(dequeOfStrings.removeLast());
+        StdOut.print(dequeOfStrings.removeLast());
+        StdOut.print(dequeOfStrings.removeLast());
+        StdOut.println(dequeOfStrings.removeLast());
         
         StdOut.println("Testing Queue behavior of the Deque");
         StdOut.println("Inserting one item into queue and retrieving it immediately");
-        DequeOfStrings.addFirst("Item 1");
-        StdOut.println(DequeOfStrings.removeLast());
-        DequeOfStrings.addLast("Item 2");
-        StdOut.println(DequeOfStrings.removeFirst());
+        dequeOfStrings.addFirst("Item 1");
+        StdOut.println(dequeOfStrings.removeLast());
+        dequeOfStrings.addLast("Item 2");
+        StdOut.println(dequeOfStrings.removeFirst());
         
         StdOut.println("Inserting 4 items into the front and retrieving it from the back");
-        DequeOfStrings.addFirst("Item 1");
-        DequeOfStrings.addFirst("Item 2");
-        DequeOfStrings.addFirst("Item 3");
-        DequeOfStrings.addFirst("Item 4");
-        StdOut.println(DequeOfStrings.removeLast());
-        StdOut.println(DequeOfStrings.removeLast());
-        StdOut.println(DequeOfStrings.removeLast());
-        StdOut.println(DequeOfStrings.removeLast());
+        dequeOfStrings.addFirst("Item 1");
+        dequeOfStrings.addFirst("Item 2");
+        dequeOfStrings.addFirst("Item 3");
+        dequeOfStrings.addFirst("Item 4");
+        StdOut.println(dequeOfStrings.removeLast());
+        StdOut.println(dequeOfStrings.removeLast());
+        StdOut.println(dequeOfStrings.removeLast());
+        StdOut.println(dequeOfStrings.removeLast());
         
         StdOut.println("Inserting 4 items into the back and retrieving it from the front");
-        DequeOfStrings.addLast("Item 1");
-        DequeOfStrings.addLast("Item 2");
-        DequeOfStrings.addLast("Item 3");
-        DequeOfStrings.addLast("Item 4");
-        StdOut.println(DequeOfStrings.removeFirst());
-        StdOut.println(DequeOfStrings.removeFirst());
-        StdOut.println(DequeOfStrings.removeFirst());
-        StdOut.println(DequeOfStrings.removeFirst());
+        dequeOfStrings.addLast("Item 1");
+        dequeOfStrings.addLast("Item 2");
+        dequeOfStrings.addLast("Item 3");
+        dequeOfStrings.addLast("Item 4");
+        StdOut.println(dequeOfStrings.removeFirst());
+        StdOut.println(dequeOfStrings.removeFirst());
+        StdOut.println(dequeOfStrings.removeFirst());
+        StdOut.println(dequeOfStrings.removeFirst());
         
         StdOut.println("Inserting 4 items into the back and iterating from the front");
-        DequeOfStrings.addLast("Item 1");
-        DequeOfStrings.addLast("Item 2");
-        DequeOfStrings.addLast("Item 3");
-        DequeOfStrings.addLast("Item 4");
+        dequeOfStrings.addLast("Item 1");
+        dequeOfStrings.addLast("Item 2");
+        dequeOfStrings.addLast("Item 3");
+        dequeOfStrings.addLast("Item 4");
 
-        for (String s: DequeOfStrings) StdOut.println(s);
+        for (String s: dequeOfStrings) StdOut.println(s);
         
     
     }

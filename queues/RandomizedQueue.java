@@ -12,7 +12,7 @@ import java.util.Iterator;
  */
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private int N;
-    private Item items[];
+    private Item[] items;
     /**
      * Constructor creates an empty randomized queue.
      */
@@ -70,7 +70,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (items.length == N/4) resize(items.length/2);
         
         // Select an index in the array at random
-        int randomIndex = StdRandom.uniform(0,N);
+        int randomIndex = StdRandom.uniform(0, N);
         
         // Perform a swap 
         Item deletedItem = items[randomIndex];
@@ -93,34 +93,36 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (items.length == N/4) resize(items.length/2);
         
          // Select an index in the array at random
-        int sampleIndex = StdRandom.uniform(0,N);
+        int sampleIndex = StdRandom.uniform(0, N);
                
         return items[sampleIndex];
     }
     
     public Iterator<Item> iterator() {
-        return new randomIterator();
+        return new RandomIterator();
     
     } // return an independent iterator over items in random order
     
-    private class randomIterator implements Iterator<Item> {
+    private class RandomIterator implements Iterator<Item> {
         private int i = N;
         
         public boolean hasNext() {
             return (i > 0); 
         }
         public Item next() {
-            int iteratorIndex = StdRandom.uniform(0,i);
-            Item iteratedItem = items[iteratorIndex];
-            items[iteratorIndex] = items[i-1];
-            items[i-1] = iteratedItem;
-            return items[--i];
+            if (this.hasNext()) {
+                int iteratorIndex = StdRandom.uniform(0, i);
+                Item iteratedItem = items[iteratorIndex];
+                items[iteratorIndex] = items[i-1];
+                items[i-1] = iteratedItem;
+                return items[--i];
+            } else throw new java.util.NoSuchElementException("No elements in queue");
         }
         public void remove() {
             throw new UnsupportedOperationException("Can't perform remove operation on iterator");
         }
     }
-    public static void main(String[] args){
+    public static void main(String[] args) {
         RandomizedQueue<Integer> randomQofItems = new RandomizedQueue<Integer>();
         StdOut.println("Initializing a randomQ of 100 integers"); 
         for (int i = 0; i < 100; i++) {
