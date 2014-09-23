@@ -75,9 +75,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         // Perform a swap 
         Item deletedItem = items[randomIndex];
         items[randomIndex] = items[N-1];
-        items[N-1] = deletedItem;
+        items[--N] = null;
         // Return this item and decrement N
-        return items[--N];
+        
+        return deletedItem;
     }
     
     /**
