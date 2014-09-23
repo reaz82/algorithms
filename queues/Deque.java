@@ -112,9 +112,14 @@ public class Deque<Item> implements Iterable<Item> {
         // 1. Make the front's next node.previous point to null, if available
         // 2. Make the front node point to the front.next node
         if (front.next != null) {
-            this.front.next.previous = null;
+            front = front.next;
+            front.previous = null;
+        } else { // it is the only element.
+            front = null;
+            back = null;
         }
-        front = front.next;
+        // Disconnect the removed item from the list.
+        first.next = null;
         // Decrement the size property
         this.size--;
         // Return the item to the client
@@ -128,9 +133,14 @@ public class Deque<Item> implements Iterable<Item> {
         // 1. Make the second to last node point to null
         // 2. Make the back node reference point to the second to last node
         if (back.previous != null) {
-            this.back.previous.next = null;
+            back = back.previous;
+            back.next = null;
+        } else {
+          back = null;
+          front = null;
         }
-        back = back.previous;
+        // Disconnect back node from the deque.
+        last.previous = null;
         // Decrement the size property
         this.size--;
         // Return the item to the client
@@ -160,11 +170,12 @@ public class Deque<Item> implements Iterable<Item> {
         */  
 
         public Item next() { 
+            if (iterator == null) throw new java.util.NoSuchElementException("Element does not exist");
             Item item;
             item = iterator.item;
             if (hasNext()) {
                 iterator = iterator.next;
-            } else throw new java.util.NoSuchElementException("Element does not exist");
+            }
             return item; 
         } 
         public void remove() {
