@@ -66,8 +66,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         // Null items are not allowed!
         if (this.isEmpty()) throw new java.util.NoSuchElementException("Can't remove item from an empty queue");
         
-        // Resize the array if it's too small
-        if (items.length == N/4) resize(items.length/2);
+        // Resize the array if it's too big
+        if (N == items.length/4) resize(items.length/2);
         
         // Select an index in the array at random
         int randomIndex = StdRandom.uniform(0, N);
