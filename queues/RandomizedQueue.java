@@ -122,8 +122,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
                 int iteratorIndex = StdRandom.uniform(0, i);
                 Item iteratedItem = iterator[iteratorIndex];
                 iterator[iteratorIndex] = iterator[i-1];
-                iterator[i-1] = iteratedItem;
-                return iterator[--i];
+                iterator[--i] = null;
+                return iteratedItem;
             } else throw new java.util.NoSuchElementException("No elements in queue");
         }
         public void remove() {
