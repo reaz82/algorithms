@@ -6,15 +6,15 @@
  * @author Reaz H.
  */
 public class Subset {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         int k = Integer.parseInt(args[0]);
-        RandomizedQueue<String> SetOfStrings = new RandomizedQueue<String>();
+        RandomizedQueue<String> setOfStrings = new RandomizedQueue<String>();
         while (!StdIn.isEmpty()) {
-            SetOfStrings.enqueue(StdIn.readString());
+            setOfStrings.enqueue(StdIn.readString());
         }
         
         for (int i = 0; i < k; i++) {
-            StdOut.println(SetOfStrings.dequeue());
+            StdOut.println(setOfStrings.dequeue());
         }
     }
 }
