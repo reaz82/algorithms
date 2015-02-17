@@ -9,11 +9,17 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class Fast {
-  private static void print(LinkedList<Point> segment ) {
+  private static void print( LinkedList<Point> segment ) {
     Point first = segment.removeFirst();
-    Point last = segment.removeLast();
-    first.drawTo(last);
-
+    Point next = first;
+    StdOut.print(first);
+    while (segment.size() > 0) {
+      StdOut.print(" -> ");
+      next = segment.removeFirst();
+      StdOut.print(next);
+    }
+    StdOut.println();
+    first.drawTo(next);
   }
   
   public static void main(String[] args) {
@@ -22,15 +28,15 @@ public class Fast {
     // Open file
     In input = new In(args[0]);
     // Read in number of points
-    Integer numberOfPoints = input.readInt();
+    int numberOfPoints = input.readInt();
     int[] ints = new int[2];
     // Read in points
     ints = input.readAllInts();
     Point[] points = new Point[numberOfPoints];
     Point[] temp = new Point[numberOfPoints];
     for (int i = 0; i < numberOfPoints; i++) {
-      points[i] = new Point(ints[i*2],ints[i*2 + 1]);
-      temp[i] = new Point(ints[i*2],ints[i*2 + 1]);
+      points[i] = new Point(ints[i*2], ints[i*2 + 1]);
+      temp[i] = new Point(ints[i*2], ints[i*2 + 1]);
       points[i].draw();
     }
 
