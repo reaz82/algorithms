@@ -46,7 +46,7 @@ public class Point implements Comparable<Point> {
         else return 0.0;
       }
       if (that.x == this.x) return Double.POSITIVE_INFINITY;
-      return ((double)(that.y - this.y)/(double)(that.x - this.x)); 
+      return ((double) (that.y - this.y)/(double) (that.x - this.x));
     }
 
     // is this point lexicographically smaller than that one?

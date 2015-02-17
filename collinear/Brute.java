@@ -24,13 +24,13 @@ public class Brute {
     // Open file
     In input = new In(args[0]);
     // Read in number of points
-    Integer u = input.readInt();
+    int u = input.readInt();
     int[] ints = new int[2];
     // Read in points
     ints = input.readAllInts();
     Point[] points = new Point[u];
     for (int i = 0; i < u; i++) {
-      points[i] = new Point(ints[i*2],ints[i*2 + 1]);
+      points[i] = new Point(ints[i*2], ints[i*2 + 1]);
       points[i].draw();
     }
     Arrays.sort(points, 0, u); 
