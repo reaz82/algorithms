@@ -12,14 +12,18 @@ import java.util.LinkedList;
 public class Fast {
   private static void print(Point base, LinkedList<Point> segment) {
     StdOut.print(base);
-    Point next = base;
-    while (segment.size() > 0) {
-      StdOut.print(" -> ");
-      next = segment.removeLast();
-      StdOut.print(next);
+    int numberOfPoints = segment.size();
+    Point[] line = new Point[numberOfPoints];
+    for (int i = 0; segment.size() > 0; i++) {
+      line[i] = segment.removeLast();
     }
-    StdOut.println();
-    base.drawTo(next);
+    Arrays.sort(line, 0, numberOfPoints);
+    for (int i = 0; i < numberOfPoints; i++) {
+      StdOut.print(" -> ");
+      StdOut.print(line[i]);
+    }
+    StdOut.println("");
+    base.drawTo(line[numberOfPoints-1]);
   }
   
   public static void main(String[] args) {
@@ -52,8 +56,8 @@ public class Fast {
 
       segment = new LinkedList<Point>();
       /*StdOut.print("Base Point: ");
-      StdOut.println(points[i]);*/
-
+      StdOut.println(points[i]);
+      */
       Arrays.sort(temp, 0, numberOfPoints, points[i].SLOPE_ORDER); // Sort all the points in slope order
 
       boolean discard = false;
@@ -64,7 +68,8 @@ public class Fast {
         /*StdOut.print("Current Point: ");
         StdOut.print(temp[j]);
         StdOut.print(" Slope: ");
-        StdOut.print(slope);*/
+        StdOut.print(slope);
+        */
         if (slope == Double.NEGATIVE_INFINITY) { // temp[0] is always points[i]. This should catch it.
           //StdOut.println(" ignored ");
           continue;
@@ -106,6 +111,7 @@ public class Fast {
             //StdOut.println(" added ");
           }
         }                        // if (current point's slope to base point is the same as the previous point
+
         prevSlope = slope;
       }
     }
