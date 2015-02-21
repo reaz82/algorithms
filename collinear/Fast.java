@@ -56,8 +56,8 @@ public class Fast {
 
       segment = new LinkedList<Point>();
       /*StdOut.print("Base Point: ");
-      StdOut.println(points[i]);
-*/
+      StdOut.println(points[i]);*/
+
       Arrays.sort(temp, 0, numberOfPoints, points[i].SLOPE_ORDER); // Sort all the points in slope order
 
       boolean discard = false;
@@ -68,10 +68,11 @@ public class Fast {
         /*StdOut.print("Current Point: ");
         StdOut.print(temp[j]);
         StdOut.print(" Slope: ");
-        StdOut.println(slope);
-*/
+        StdOut.print(slope);*/
+
         if (slope == Double.NEGATIVE_INFINITY) { // temp[0] is always points[i]. This should catch it.
           //StdOut.println(" ignored ");
+          prevSlope = slope;
           continue;
         }
 
@@ -80,6 +81,7 @@ public class Fast {
           if (points[i].compareTo(temp[j]) > 0) { // However, if the point is smaller that the base point
               discard = true;                     // we should discard this point and future points with
               //StdOut.println(" ignored ");
+              prevSlope = slope;
               continue;                           // same slope.
           } else {
             if (!discard) {                // Otherwise if we aren't already discarding this line
@@ -87,6 +89,7 @@ public class Fast {
               //StdOut.println(" added ");
             } else {
               //StdOut.println(" ignored ");
+              prevSlope = slope;
               continue;
             }
           }
@@ -102,6 +105,7 @@ public class Fast {
           if (points[i].compareTo(temp[j]) > 0) { // If the current point is smaller than the base point
             discard = true;                       // we want to ignore this point and future points with the same slope
             //StdOut.println(" ignored ");
+            prevSlope = slope;
             continue;
           }
 
