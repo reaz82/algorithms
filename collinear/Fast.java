@@ -5,7 +5,7 @@
  * 
  * @author Reaz H.
  */
-import java.lang.Package;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -57,7 +57,7 @@ public class Fast {
       segment = new LinkedList<Point>();
       /*StdOut.print("Base Point: ");
       StdOut.println(points[i]);
-      */
+*/
       Arrays.sort(temp, 0, numberOfPoints, points[i].SLOPE_ORDER); // Sort all the points in slope order
 
       boolean discard = false;
@@ -68,8 +68,8 @@ public class Fast {
         /*StdOut.print("Current Point: ");
         StdOut.print(temp[j]);
         StdOut.print(" Slope: ");
-        StdOut.print(slope);
-        */
+        StdOut.println(slope);
+*/
         if (slope == Double.NEGATIVE_INFINITY) { // temp[0] is always points[i]. This should catch it.
           //StdOut.println(" ignored ");
           continue;
@@ -82,7 +82,7 @@ public class Fast {
               //StdOut.println(" ignored ");
               continue;                           // same slope.
           } else {
-            if (discard != true) {                // Otherwise if we aren't already discarding this line
+            if (!discard) {                // Otherwise if we aren't already discarding this line
               segment.addLast(temp[j]);           // segment, we will add it to our segment
               //StdOut.println(" added ");
             } else {
@@ -96,7 +96,7 @@ public class Fast {
 
           if (segment.size() > 2) {                        // Does the previous line segment have at least 4 collinear points?
             //StdOut.println(" Segment found!");
-            print (points[i], segment);
+            print(points[i], segment);
           }
 
           if (points[i].compareTo(temp[j]) > 0) { // If the current point is smaller than the base point
@@ -105,13 +105,18 @@ public class Fast {
             continue;
           }
 
-          if (discard != true) {
+          if (!discard) {
             segment = new LinkedList<Point>();     // We need to start a new line segment
             segment.addLast(temp[j]);              // with the current point as the initial point
             //StdOut.println(" added ");
           }
         }                        // if (current point's slope to base point is the same as the previous point
-
+        if (j == (numberOfPoints - 1)) {  // Corner case: The last element should trigger a segment evaluation
+          if (segment.size() > 2) {                        // Does the previous line segment have at least 4 collinear points?
+            //StdOut.println(" Segment found!");
+            print(points[i], segment);
+          }
+        }
         prevSlope = slope;
       }
     }
