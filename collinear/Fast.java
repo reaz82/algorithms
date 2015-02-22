@@ -6,6 +6,7 @@
  * @author Reaz H.
  */
 
+import java.awt.*;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -56,8 +57,8 @@ public class Fast {
 
       segment = new LinkedList<Point>();
       /*StdOut.print("Base Point: ");
-      StdOut.println(points[i]);*/
-
+      StdOut.println(points[i]);
+      */
       Arrays.sort(temp, 0, numberOfPoints, points[i].SLOPE_ORDER); // Sort all the points in slope order
 
       boolean discard = false;
@@ -68,8 +69,8 @@ public class Fast {
         /*StdOut.print("Current Point: ");
         StdOut.print(temp[j]);
         StdOut.print(" Slope: ");
-        StdOut.print(slope);*/
-
+        StdOut.print(slope);
+        */
         if (slope == Double.NEGATIVE_INFINITY) { // temp[0] is always points[i]. This should catch it.
           //StdOut.println(" ignored ");
           prevSlope = slope;
@@ -82,6 +83,7 @@ public class Fast {
               discard = true;                     // we should discard this point and future points with
               //StdOut.println(" ignored ");
               prevSlope = slope;
+              segment = new LinkedList<Point>();
               continue;                           // same slope.
           } else {
             if (!discard) {                // Otherwise if we aren't already discarding this line
