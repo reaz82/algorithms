@@ -1,5 +1,9 @@
-/**
- * Created by rhasan on 2/21/15.
+/** 
+ * Compilation  : java -cp stdlib.jar:algs4.jar:. Board.java
+ * Execution    : java -cp stdlib.jar:algs4.jar:. Board.java
+ * Dependencies : none
+ * 
+ * Board.
  */
 public class Board {
     private final int[][] blocks;
@@ -60,15 +64,15 @@ public class Board {
     }
     //public Iterable<Board> neighbors() {}           // All neighboring boards
     public String toString() {                      // String representation of the board
-        String boardString = new String();
-        boardString = "" + this.N + "\n";
+        StringBuilder boardString = new StringBuilder();
+        boardString.append(this.N + "\n");
         for(int i = 0; i < N; i++) {
             for(int j = 0; j < N; j++) {
-                boardString =  boardString + this.blocks[i][j] + " ";
+                boardString.append(String.format("%2d ", this.blocks[i][j]));
             }
-            boardString = boardString + "\n";
+            boardString.append("\n");
         }
-        return boardString;
+        return boardString.toString();
     }
 
     public static void main(String[] args) {
